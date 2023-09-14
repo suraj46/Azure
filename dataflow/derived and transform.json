@@ -1,0 +1,65 @@
+{
+	"name": "derived and transform",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "source_sql_to_blob",
+						"type": "DatasetReference"
+					},
+					"name": "sourcesales"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "sinkcopyactivity",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumn"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          OrderDate as date,",
+				"          ProductKey as integer,",
+				"          EnglishProductName as string,",
+				"          SalesAmount as double",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sourcesales",
+				"sourcesales derive(Discount = toFloat(SalesAmount-100),",
+				"          Productname = upper(EnglishProductName)) ~> derivedColumn",
+				"derivedColumn select(mapColumn(",
+				"          OrderDate,",
+				"          ProductKey,",
+				"          Productname,",
+				"          SalesAmount,",
+				"          Discount",
+				"     ),",
+				"     partitionBy('hash', 1),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     dateFormat:'dd/MM/yyyy',",
+				"     timestampFormat:'dd/MM/yyyy',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}

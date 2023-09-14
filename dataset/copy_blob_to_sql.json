@@ -1,0 +1,36 @@
+{
+	"name": "copy_blob_to_sql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "blobl_to_sql_table_sales",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "OrderDate",
+				"type": "date"
+			},
+			{
+				"name": "ProductKey",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EnglishProductName",
+				"type": "varchar"
+			},
+			{
+				"name": "PurchaseAmount",
+				"type": "float",
+				"precision": 15
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "sales"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

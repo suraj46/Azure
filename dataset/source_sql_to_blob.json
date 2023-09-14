@@ -1,0 +1,36 @@
+{
+	"name": "source_sql_to_blob",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "sql_to_blob_storage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "OrderDate",
+				"type": "date"
+			},
+			{
+				"name": "ProductKey",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EnglishProductName",
+				"type": "varchar"
+			},
+			{
+				"name": "SalesAmount",
+				"type": "float",
+				"precision": 15
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "sales"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

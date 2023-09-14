@@ -1,0 +1,9 @@
+{
+	"name": "surajdatafactory1122",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "2c7af226-bbfe-42bd-9b35-aec4554517de",
+		"tenantId": "4b99b1fb-94e6-4428-b6b1-3d659ed1ed8b"
+	}
+}
