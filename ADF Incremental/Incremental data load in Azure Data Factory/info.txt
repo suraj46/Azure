@@ -1,6 +1,0 @@
-selected resource name:		increment
-selected resource type:		pipeline
-factory name:			surajfactory
-factory location:		eastus
-subscription id:		93467407-b89a-418a-8924-f164017e1a79
-time of download (UTC):		Tue, 26 Sep 2023 10:34:53 GMT
